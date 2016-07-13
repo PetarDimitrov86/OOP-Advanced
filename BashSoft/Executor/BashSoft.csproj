@@ -47,13 +47,23 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Contracts\Course.cs" />
+    <Compile Include="Contracts\IAsynchDownloader.cs" />
+    <Compile Include="Contracts\IContentComparer.cs" />
+    <Compile Include="Contracts\IDatabase.cs" />
+    <Compile Include="Contracts\IDataFilter.cs" />
+    <Compile Include="Contracts\IDataSorter.cs" />
     <Compile Include="Contracts\IDirectoryChanger.cs" />
     <Compile Include="Contracts\IDirectoryCreator.cs" />
     <Compile Include="Contracts\IDirectoryManager.cs" />
     <Compile Include="Contracts\IDirectoryTraverser.cs" />
+    <Compile Include="Contracts\IDownloader.cs" />
+    <Compile Include="Contracts\IDownloadManager.cs" />
+    <Compile Include="Contracts\IFilteredTaker.cs" />
     <Compile Include="Contracts\IInterpreter.cs" />
     <Compile Include="Contracts\IExecutable.cs" />
+    <Compile Include="Contracts\IOrderedTaker.cs" />
     <Compile Include="Contracts\IReader.cs" />
+    <Compile Include="Contracts\IRequester.cs" />
     <Compile Include="Contracts\Student.cs" />
     <Compile Include="Exceptions\DuplicateEntryInStructureException.cs" />
     <Compile Include="Exceptions\InvalidCommandException.cs" />

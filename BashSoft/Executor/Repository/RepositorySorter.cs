@@ -2,12 +2,13 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using Executor.Contracts;
 
 namespace Executor.Repository
 {
-    public class RepositorySorter
+    public class RepositorySorter : IDataSorter
     {                                                
-        public void OrderAndTake(Dictionary<string, double> studentsMarks,
+        public void PrintSortedStudents(Dictionary<string, double> studentsMarks,
           string comparison, int studentsToTake)
         {
             comparison = comparison.ToLower();

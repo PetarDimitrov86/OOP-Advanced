@@ -16,13 +16,13 @@ namespace Executor.IO.Commands
         private string input;
         private string[] data;
 
-        private Tester tester;
-        private StudentsRepository repository;
-        private DownloadManager downloadManager;
+        private IContentComparer tester;
+        private IDatabase repository;
+        private IDownloadManager downloadManager;
         private IDirectoryManager inputOutputManager;
 
-        public Command(string input, string[] data, Tester tester, StudentsRepository repository,
-            DownloadManager downloadManager, IDirectoryManager ioManager)
+        public Command(string input, string[] data, IContentComparer tester, IDatabase repository,
+            IDownloadManager downloadManager, IDirectoryManager ioManager)
         {
             this.Input = input;
             this.Data = data;
@@ -62,12 +62,12 @@ namespace Executor.IO.Commands
             }
         }
 
-        protected StudentsRepository Repository
+        protected IDatabase Repository
         {
             get { return this.repository; }
         }
 
-        protected Tester Tester
+        protected IContentComparer Tester
         {
             get { return this.tester; }
         }
@@ -77,7 +77,7 @@ namespace Executor.IO.Commands
             get { return this.inputOutputManager; }
         }
 
-        protected DownloadManager DownloadManager
+        protected IDownloadManager DownloadManager
         {
             get { return this.downloadManager; }
         }

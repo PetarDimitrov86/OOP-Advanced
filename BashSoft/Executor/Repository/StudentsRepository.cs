@@ -10,15 +10,15 @@ using Executor.IO;
 
 namespace Executor.Repository
 {
-    public class StudentsRepository
+    public class StudentsRepository : IDatabase
     {
         private Dictionary<string, Course> courses;
         private Dictionary<string, Student> students;
 
         private bool isDataInitialized;
 
-        private RepositioryFilter filter;
-        private RepositorySorter sorter;
+        private IDataFilter filter;
+        private IDataSorter sorter;
 
         public IReadOnlyDictionary<string, Course> Courses
         {
@@ -44,7 +44,7 @@ namespace Executor.Repository
             }
         }
 
-        public StudentsRepository(RepositorySorter sorter, RepositioryFilter filter)
+        public StudentsRepository(IDataSorter sorter, IDataFilter filter)
         {
             this.filter = filter;
             this.sorter = sorter;
@@ -144,7 +144,7 @@ namespace Executor.Repository
             }
         }
 
-        public void GetStudentScoresFromCourse(string courseName, string username)
+        public void GetStudentMarkInCourse(string courseName, string username)
         {
             if (this.IsQueryForStudentPossible(courseName, username))
             {
@@ -153,14 +153,14 @@ namespace Executor.Repository
             }
         }
 
-        public void GetAllStudentsFromCourse(string courseName)
+        public void GetStudentsByCourse(string courseName)
         {
             if (this.IsQueryForCoursePossible(courseName))
             {
                 OutputWriter.WriteMessageOnNewLine($"{courseName}:");
                 foreach (var studentMarksEntry in this.Courses[courseName].StudentByName)
                 {
-                    this.GetStudentScoresFromCourse(courseName, studentMarksEntry.Key);
+                    this.GetStudentMarkInCourse(courseName, studentMarksEntry.Key);
                 }
             }
         }
@@ -177,7 +177,7 @@ namespace Executor.Repository
                 Dictionary<string, double> marks = this.Courses[courseName].StudentByName
                                                      .ToDictionary(x => x.Key, x => x.Value.MarksByCourseName[courseName]);
 
-                this.sorter.OrderAndTake(marks, comparison, studentsToTake.Value);
+                this.sorter.PrintSortedStudents(marks, comparison, studentsToTake.Value);
             }
         }
 
@@ -193,7 +193,7 @@ namespace Executor.Repository
                 Dictionary<string, double> marks = this.Courses[courseName].StudentByName
                                                     .ToDictionary(x => x.Key, x => x.Value.MarksByCourseName[courseName]);
 
-                this.filter.FilterAndTake(marks, givenFilter, studentsToTake.Value);
+                this.filter.PrintFilteredStudents(marks, givenFilter, studentsToTake.Value);
             }
         }
 

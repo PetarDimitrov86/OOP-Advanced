@@ -7,12 +7,13 @@ using System.Net;
 using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
+using Executor.Contracts;
 using Executor.Exceptions;
 using Executor.IO;
 
 namespace Executor.Network
 {
-    public class DownloadManager
+    public class DownloadManager : IDownloadManager
     {
         private WebClient webClient;
 

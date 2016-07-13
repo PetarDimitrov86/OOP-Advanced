@@ -13,8 +13,8 @@ namespace Executor.IO.Commands
 {
     class ShowCourseCommand : Command
     {
-        public ShowCourseCommand(string input, string[] data, Tester tester,
-            StudentsRepository repository, DownloadManager downloadManager, IDirectoryManager ioManager)
+        public ShowCourseCommand(string input, string[] data, IContentComparer tester,
+            IDatabase repository, IDownloadManager downloadManager, IDirectoryManager ioManager)
             : base(input, data, tester, repository, downloadManager, ioManager)
         {
         }
@@ -24,13 +24,13 @@ namespace Executor.IO.Commands
             if (this.Data.Length == 2)
             {
                 string courseName = this.Data[1];
-                this.Repository.GetAllStudentsFromCourse(courseName);
+                this.Repository.GetStudentsByCourse(courseName);
             }
             else if (this.Data.Length == 3)
             {
                 string courseName = this.Data[1];
                 string userName = this.Data[2];
-                this.Repository.GetStudentScoresFromCourse(courseName, userName);
+                this.Repository.GetStudentMarkInCourse(courseName, userName);
             }
             else
             {

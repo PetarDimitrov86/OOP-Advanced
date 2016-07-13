@@ -4,12 +4,13 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Executor.Contracts;
 
 namespace Executor.Repository
 {
-    public class RepositioryFilter
+    public class RepositioryFilter : IDataFilter
     {
-        public void FilterAndTake(Dictionary<string, double> studentsWithMarks, string wantedFilter, int studentsToTake)
+        public void PrintFilteredStudents(Dictionary<string, double> studentsWithMarks, string wantedFilter, int studentsToTake)
         {
             if (wantedFilter == "excellent")
             {

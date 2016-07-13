@@ -13,8 +13,8 @@ namespace Executor.IO.Commands
 {
     class DownloadFileCommand : Command
     {
-        public DownloadFileCommand(string input, string[] data, Tester tester,
-            StudentsRepository repository, DownloadManager downloadManager, IDirectoryManager ioManager)
+        public DownloadFileCommand(string input, string[] data, IContentComparer tester,
+            IDatabase repository, IDownloadManager downloadManager, IDirectoryManager ioManager)
             : base(input, data, tester, repository, downloadManager, ioManager)
         {
         }

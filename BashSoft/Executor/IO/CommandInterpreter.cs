@@ -15,13 +15,13 @@ namespace Executor.IO
 {
     public class CommandInterpreter : IInterpreter
     {
-        private Tester judge;
-        private StudentsRepository repository;
-        private DownloadManager downloadManager;
+        private IContentComparer judge;
+        private IDatabase repository;
+        private IDownloadManager downloadManager;
         private IDirectoryManager inputOutputManager;
 
-        public CommandInterpreter(Tester judge, StudentsRepository repository,
-            DownloadManager downloadManager, IDirectoryManager inputOutputManager)
+        public CommandInterpreter(IContentComparer judge, IDatabase repository,
+            IDownloadManager downloadManager, IDirectoryManager inputOutputManager)
         {
             this.judge = judge;
             this.repository = repository;
