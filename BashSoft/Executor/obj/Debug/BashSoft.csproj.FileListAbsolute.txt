@@ -1,6 +1,0 @@
-C:\Users\Petar\Downloads\SoftUni\Lab\StoryMode\StoryMode\Executor\bin\Debug\Executor.exe.config
-C:\Users\Petar\Downloads\SoftUni\Lab\StoryMode\StoryMode\Executor\obj\Debug\BashSoft.csprojResolveAssemblyReference.cache
-C:\Users\Petar\Downloads\SoftUni\Lab\StoryMode\StoryMode\Executor\bin\Debug\Executor.exe
-C:\Users\Petar\Downloads\SoftUni\Lab\StoryMode\StoryMode\Executor\bin\Debug\Executor.pdb
-C:\Users\Petar\Downloads\SoftUni\Lab\StoryMode\StoryMode\Executor\obj\Debug\Executor.exe
-C:\Users\Petar\Downloads\SoftUni\Lab\StoryMode\StoryMode\Executor\obj\Debug\Executor.pdb
