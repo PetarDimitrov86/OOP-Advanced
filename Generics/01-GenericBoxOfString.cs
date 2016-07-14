@@ -2,16 +2,16 @@
 
 public class GenericBox<T>
 {
-    private string name;
+    private T type;
 
-    public GenericBox(string name)
+    public GenericBox(T type)
     {
-        this.name = name;
+        this.type = type;
     }
 
     public override string ToString()
     {
-        return $"{this.name.GetType().FullName}: {this.name}";
+        return $"{this.type.GetType().FullName}: {this.type}";
     }
 }
 
