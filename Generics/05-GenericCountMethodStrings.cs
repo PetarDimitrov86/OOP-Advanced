@@ -1,34 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 
-public class GenericBox<T>
-{
-    private T type;
-    public static int Counter;
-
-    public GenericBox(T type)
-    {
-        this.type = type;
-    }
-
-    public override string ToString()
-    {
-        return $"{this.type.GetType().FullName}: {this.type}";
-    }
-
-    public static void Compare<T>(List<T> list, T element)
-        where T : IComparable<T>
-    {
-        foreach (var generic in list)
-        {
-            if (generic.CompareTo(element)> 0)
-            {
-                Counter++;
-            }
-        }
-    }
-}
-
 class GenericCountMethodStrings
 {
     static void Main(string[] args)
@@ -41,7 +13,20 @@ class GenericCountMethodStrings
             genericList.Add(input);
         }
         string comparingElement = Console.ReadLine();
-        GenericBox<string>.Compare<string>(genericList, comparingElement);
-        Console.WriteLine(GenericBox<string>.Counter);
+        Console.WriteLine(Compare(genericList, comparingElement));
+    }
+
+    public static int Compare<T>(List<T> list, T element)
+      where T : IComparable<T>
+    {
+        int counter = 0;
+        foreach (var generic in list)
+        {
+            if (generic.CompareTo(element) > 0)
+            {
+                counter++;
+            }
+        }
+        return counter;
     }
 }
