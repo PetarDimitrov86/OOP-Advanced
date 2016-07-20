@@ -1,43 +1,67 @@
 ﻿using System;
-using System.Collections.Generic;
 
-public static class GenericList<T>
+public class GenericList<T>  where T : IComparable<T>
 {
-    public static List<T> list = new List<T>();
+    private T[] collection;
 
-    public static void Add(T element)
+    public GenericList()
     {
-        list.Add(element);
+        this.collection = new T[0];
     }
 
-    public static void Remove(int index)
+    public void Add(T element)
     {
-        list.RemoveAt(index);
-    }
-
-    public static bool Contains(T element)
-    {
-        if (list.Contains(element))
+        T[] biggerCollection = new T[collection.Length +1 ];
+        for (int i = 0; i < collection.Length; i++)
         {
-            return true;
+            biggerCollection[i] = collection[i];
+        }
+        biggerCollection[biggerCollection.Length - 1] = element;
+        collection = biggerCollection;
+    }
+
+    public void Remove(int index)
+    {
+        if (index < this.collection.Length)
+        {
+            T[] smallerCollection = new T[collection.Length - 1];
+            for (int i = 0; i < index; i++)
+            {
+                smallerCollection[i] = collection[i];
+            }
+            for (int i = index + 1; i < collection.Length; i++)
+            {
+                smallerCollection[i - 1] = collection[i];
+            }
+            collection = smallerCollection;
+        }
+    }
+
+    public bool Contains(T element)
+    {
+        foreach (var item in collection)
+        {
+            if (item.Equals(element))
+            {
+                return true;
+            }
         }
         return false;
     }
 
-    public static void Swap(int indexFirst, int indexSecond)
+    public void Swap(int indexFirst, int indexSecond)
     {
-        T firstElement = list[indexFirst];
-        list[indexFirst] = list[indexSecond];
-        list[indexSecond] = firstElement;
+        T firstElement = collection[indexFirst];
+        collection[indexFirst] = collection[indexSecond];
+        collection[indexSecond] = firstElement;
     }
 
-    public static int CountGreaterThan<T>(List<T> list, T element)
-      where T : IComparable<T>
+    public int Compare(T element)
     {
         int counter = 0;
-        foreach (var generic in list)
+        for (int i = 0; i < collection.Length; i++)
         {
-            if (generic.CompareTo(element) > 0)
+            if (collection[i].CompareTo(element) >0)
             {
                 counter++;
             }
@@ -45,74 +69,86 @@ public static class GenericList<T>
         return counter;
     }
 
-    public static T Max<T>(List<T> list)
-      where T : IComparable<T>
+    public T Max()
     {
-        T maxElement = list[0];
-        foreach (var generic in list)
+        T maxElement = collection[0];
+        foreach (var item in collection)
         {
-            if (generic.CompareTo(maxElement) > 0)
+            if (item.CompareTo(maxElement) > 0)
             {
-                maxElement = generic;
+                maxElement = item;
             }
         }
         return maxElement;
     }
 
-    public static T Min<T>(List<T> list)
-      where T : IComparable<T>
+    public T Min()
     {
-        T minElement = list[0];
-        foreach (var generic in list)
+        T minElement = collection[0];
+        foreach (var item in collection)
         {
-            if (generic.CompareTo(minElement) < 0)
+            if (item.CompareTo(minElement) < 0)
             {
-                minElement = generic;
+                minElement = item;
             }
         }
         return minElement;
     }
+
+    public void Print()
+    {
+        foreach (var item in collection)
+        {
+            Console.WriteLine(item);
+        }
+    }
 }
 
-class CustomList
+public class CustomList
 {
     static void Main(string[] args)
     {
         string input = Console.ReadLine();
+        GenericList<string> ourList = new GenericList<string>();
         while (input!= "END")
         {
             string[] commandInfo = input.Split();
             switch (input)
             {
                 case "Min":
-                    Console.WriteLine(GenericList<string>.Min(GenericList<string>.list));
+                    Console.WriteLine(ourList.Min());
                     break;
                 case "Max":
-                    Console.WriteLine(GenericList<string>.Max(GenericList<string>.list));
+                    Console.WriteLine(ourList.Max());
                     break;
                 case "Print":
-                    Console.WriteLine(string.Join(Environment.NewLine, GenericList<string>.list));
+                    ourList.Print();
                     break;
             }
             if (input.Contains("Add"))
             {
-                GenericList<string>.Add(commandInfo[1]);
+                string textToAdd = commandInfo[1];
+                ourList.Add(textToAdd);
             }
             else if (input.Contains("Remove"))
             {
-                GenericList<string>.Remove(int.Parse(commandInfo[1]));
+                int indexToRemove = int.Parse(commandInfo[1]);
+                ourList.Remove(indexToRemove);
+
             }
             else if (input.Contains("Contains"))
             {
-                Console.WriteLine(GenericList<string>.Contains(commandInfo[1]).ToString());
+                Console.WriteLine(ourList.Contains(commandInfo[1]));
             }
             else if (input.Contains("Swap"))
             {
-                GenericList<string>.Swap(int.Parse(commandInfo[1]), int.Parse(commandInfo[2]));
+                int firstIndex = int.Parse(commandInfo[1]);
+                int secondIndex = int.Parse(commandInfo[2]);
+                ourList.Swap(firstIndex, secondIndex);
             }
             else if (input.Contains("Greater"))
             {
-                Console.WriteLine(GenericList<string>.CountGreaterThan(GenericList<string>.list, commandInfo[1]));
+                Console.WriteLine(ourList.Compare(commandInfo[1]));
             }
             input = Console.ReadLine();
         }
