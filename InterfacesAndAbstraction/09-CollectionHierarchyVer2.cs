@@ -91,15 +91,15 @@ public class CollectionHierarchy
         string[] elementsToAdd = Console.ReadLine().Split();
         int removeOperations = int.Parse(Console.ReadLine());
 
-        PrintCollection(elementsToAdd,addCollection);
-        PrintCollection(elementsToAdd, addRemoveCollection);
-        PrintCollection(elementsToAdd, myList);
-     
-        PrintCollection(removeOperations, addRemoveCollection);
-        PrintCollection(removeOperations, myList);
+        PrintAdd(elementsToAdd, addCollection);
+        PrintAdd(elementsToAdd, addRemoveCollection);
+        PrintAdd(elementsToAdd, myList);
+
+        PrintRemove(removeOperations, addRemoveCollection);
+        PrintRemove(removeOperations, myList);
     }
 
-    public static void PrintCollection(string[] elements, IAddable collection)
+    public static void PrintAdd(string[] elements, IAddable collection)
     {
         foreach (var element in elements)
         {
@@ -107,7 +107,7 @@ public class CollectionHierarchy
         }
         Console.WriteLine();
     }
-    public static void PrintCollection(int removeOperations, IRemoveable collection)
+    public static void PrintRemove(int removeOperations, IRemoveable collection)
     {
         for (int i = 0; i < removeOperations; i++)
         {
