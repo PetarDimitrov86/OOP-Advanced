@@ -1,8 +1,7 @@
 ﻿using System;
-using System.Collections;
 using System.Collections.Generic;
 
-public interface IAddable : IEnumerable
+public interface IAddable
 {
     int Add(string element);
 }
@@ -31,11 +30,6 @@ public class AddCollection : IAddable
         this.addCollectionList.Add(element);
         return addCollectionList.Count - 1;
     }
-
-    public IEnumerator GetEnumerator()
-    {
-        return this.addCollectionList.GetEnumerator();
-    }
 }
 
 public class AddRemoveCollection : IRemoveable
@@ -58,11 +52,6 @@ public class AddRemoveCollection : IRemoveable
         string elementToRemove = this.addRemoveCollection[addRemoveCollection.Count - 1];
         this.addRemoveCollection.RemoveAt(addRemoveCollection.Count - 1);
         return elementToRemove;
-    }
-
-    public IEnumerator GetEnumerator()
-    {
-        return this.addRemoveCollection.GetEnumerator();
     }
 }
 
@@ -88,11 +77,6 @@ public class MyList : IMyListable
         string elementToRemove = this.myList[0];
         this.myList.RemoveAt(0);
         return elementToRemove;
-    }
-
-    public IEnumerator GetEnumerator()
-    {
-        return this.myList.GetEnumerator();
     }
 }
 
