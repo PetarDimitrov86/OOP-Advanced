@@ -53,7 +53,7 @@ public class Card : IComparable<Card>
         int rank = (int)Enum.Parse(typeof(Suit), this.Suit);
 
         return $"Card name: {Enum.Parse(typeof(Rank), this.Rank)} of {Enum.Parse(typeof(Suit), this.Suit)}; Card power: {suit + rank}";
-        // return $"Card name: {this.Rank.ToString()} of {this.Suit.ToString()}; Card power: {(int) this.Rank + (int) this.Suit}";
+        // return $"Card name: {this.Rank} of {this.Suit}; Card power: {(int) this.Rank + (int) this.Suit}";
     }
 }
 
