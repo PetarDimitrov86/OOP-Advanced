@@ -35,10 +35,12 @@ public class Card : IComparable<Card>
         Rank = rank;
         Suit = suit;
     }
+    
+    //public Card(Rank rank, Suit suit)
 
     public int Power
     { get { return (int) Enum.Parse(typeof(Rank), this.Rank) + (int) Enum.Parse(typeof(Suit), this.Suit); } }
-
+    // get { return (int) this.Rank + (int) this.Suit; }
 
     public int CompareTo(Card other)
     {
@@ -51,6 +53,7 @@ public class Card : IComparable<Card>
         int rank = (int)Enum.Parse(typeof(Suit), this.Suit);
 
         return $"Card name: {Enum.Parse(typeof(Rank), this.Rank)} of {Enum.Parse(typeof(Suit), this.Suit)}; Card power: {suit + rank}";
+        // return $"Card name: {this.Rank.ToString()} of {this.Suit.ToString()}; Card power: {(int) this.Rank + (int) this.Suit}";
     }
 }
 
