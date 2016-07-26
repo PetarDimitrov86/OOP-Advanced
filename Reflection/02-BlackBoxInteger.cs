@@ -61,30 +61,39 @@ public class BlackBoxInteger
         ConstructorInfo ourConstructor = nonPublicCtors[0];
         BlackBoxInt testBlackBox = (BlackBoxInt)ourConstructor.Invoke(new object[] { 0 });
 
+        MethodInfo[] methods = myType.GetMethods(BindingFlags.Instance | BindingFlags.NonPublic);
+
         string input = Console.ReadLine();
         while (input != "END")
         {
-            int fieldValue = (int) field.GetValue(testBlackBox);
             string[] commandInfo = input.Split('_');
+            object[] parameters = new object[] {int.Parse(commandInfo[1])};
+
             switch (commandInfo[0])
             {
                 case "Add":
-                    field.SetValue(testBlackBox, fieldValue + int.Parse(commandInfo[1]));
+                    MethodInfo addMethod = methods.First(m=>m.Name == "Add");
+                    addMethod.Invoke(testBlackBox, parameters);
                     break;
                 case "Subtract":
-                    field.SetValue(testBlackBox, fieldValue - int.Parse(commandInfo[1]));
+                    MethodInfo subtractMethod = methods.First(m => m.Name == "Subtract");
+                    subtractMethod.Invoke(testBlackBox, parameters);
                     break;
                 case "Divide":
-                    field.SetValue(testBlackBox, fieldValue / int.Parse(commandInfo[1]));
+                    MethodInfo divideMethod = methods.First(m => m.Name == "Divide");
+                    divideMethod.Invoke(testBlackBox, parameters);
                     break;
                 case "Multiply":
-                    field.SetValue(testBlackBox, fieldValue * int.Parse(commandInfo[1]));
+                    MethodInfo multiplyMethod = methods.First(m => m.Name == "Multiply");
+                    multiplyMethod.Invoke(testBlackBox, parameters);
                     break;
                 case "RightShift":
-                    field.SetValue(testBlackBox, fieldValue >>= int.Parse(commandInfo[1]));
+                    MethodInfo rightShiftMethod = methods.First(m => m.Name == "RightShift");
+                    rightShiftMethod.Invoke(testBlackBox, parameters);
                     break;
                 case "LeftShift":
-                    field.SetValue(testBlackBox, fieldValue <<= int.Parse(commandInfo[1]));
+                    MethodInfo leftShiftMethod = methods.First(m => m.Name == "LeftShift");
+                    leftShiftMethod.Invoke(testBlackBox, parameters);
                     break;
             }
             Console.WriteLine(field.GetValue(testBlackBox));
