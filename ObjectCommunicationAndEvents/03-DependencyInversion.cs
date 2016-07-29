@@ -2,44 +2,26 @@
 
 public class PrimitiveCalculator
 {
-    private AdditionStrategy additionStrategy;
-    private SubtractionStrategy subtractionStrategy;
-    private DivisionStrategy divisionStrategy;
-    private MultiplicationStrategy multiplicationStrategy;
+    private IStrategy strategy;
 
-    private IStrategy currentStrategy;
-
-    public PrimitiveCalculator()
-    {
-        this.additionStrategy = new AdditionStrategy();
-        this.subtractionStrategy = new SubtractionStrategy();
-        this.divisionStrategy = new DivisionStrategy();
-        this.multiplicationStrategy = new MultiplicationStrategy();
-        this.currentStrategy = additionStrategy;
+    public PrimitiveCalculator() 
+        : this(new AdditionStrategy())
+    { 
     }
 
-    public void changeStrategy(char @operator)
+    public PrimitiveCalculator(IStrategy strategy)
     {
-        switch (@operator)
-        {
-            case '+':
-                currentStrategy = additionStrategy;
-                break;
-            case '-':
-                currentStrategy = subtractionStrategy;
-                break;
-            case '/':
-                currentStrategy = divisionStrategy;
-                break;
-            case '*':
-                currentStrategy = multiplicationStrategy;
-                break;
-        }
+        this.strategy = strategy;
     }
 
-    public int performCalculation(int firstOperand, int secondOperand)
+    public void ChangeStrategy(IStrategy strategy)
     {
-        return currentStrategy.Calculate(firstOperand, secondOperand);
+        this.strategy = strategy;
+    }
+
+    public int PerformCalculation(int firstOperand, int secondOperand)
+    {
+        return this.strategy.Calculate(firstOperand, secondOperand);
     }
 }
 
@@ -83,20 +65,36 @@ public interface IStrategy
 
 public class DependencyInversion
 {
-    static void Main(string[] args)
+    static void Main()
     {
         PrimitiveCalculator calculator = new PrimitiveCalculator();
+        IStrategy newStrategy = new AdditionStrategy();
         string input = Console.ReadLine();
         while (input != "End")
         {
             string[] commandInfo = input.Split();
             if (commandInfo[0] == "mode")
             {
-                calculator.changeStrategy(commandInfo[1][0]);
+                switch (commandInfo[1][0])
+                {
+                    case '+':
+                        newStrategy = new AdditionStrategy();
+                        break;
+                    case '-':
+                        newStrategy = new SubtractionStrategy();
+                        break;
+                    case '/':
+                        newStrategy = new DivisionStrategy();
+                        break;
+                    case '*':
+                        newStrategy = new MultiplicationStrategy();
+                        break;
+                }
+                calculator.ChangeStrategy(newStrategy);
             }
             else
             {
-                int result = calculator.performCalculation(int.Parse(commandInfo[0]), int.Parse(commandInfo[1]));
+                int result = calculator.PerformCalculation(int.Parse(commandInfo[0]), int.Parse(commandInfo[1]));
                 Console.WriteLine(result);
             }
             input = Console.ReadLine();
