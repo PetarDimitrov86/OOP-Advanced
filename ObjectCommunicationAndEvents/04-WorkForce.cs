@@ -1,8 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 public abstract class Employee
 {
@@ -15,31 +12,9 @@ public abstract class Employee
         this.WorkHoursPerWeek = workHoursPerWeek;
     }
 
-    public string Name
-    {
-        get
-        {
-            return name;
-        }
+    public string Name { get; set; }
 
-        set
-        {
-            name = value;
-        }
-    }
-
-    public int WorkHoursPerWeek
-    {
-        get
-        {
-            return workHoursPerWeek;
-        }
-
-        set
-        {
-            workHoursPerWeek = value;
-        }
-    }
+    public int WorkHoursPerWeek { get; set; }
 }
 
 public class StandartEmployee : Employee
@@ -79,44 +54,10 @@ public class Job
 
     public event JobUpdateHandler JobUpdate;
 
-    public string Name
-    {
-        get
-        {
-            return name;
-        }
+    public string Name { get; set; }
+    public int WorkHoursRequired { get; set; }
 
-        set
-        {
-            name = value;
-        }
-    }
-
-    public int WorkHoursRequired
-    {
-        get
-        {
-            return workHoursRequired;
-        }
-
-        set
-        {
-            workHoursRequired = value;
-        }
-    }
-
-    public Employee Employee
-    {
-        get
-        {
-            return this.employee;
-        }
-
-        set
-        {
-            this.employee = value;
-        }
-    }
+    public Employee Employee { get; set; }
 
     public void Update()
     {
@@ -130,10 +71,7 @@ public class Job
 
     public void OnJobUpdate(JobDoneEventArgs e)
     {
-        if (this.JobUpdate != null)
-        {
-            this.JobUpdate(this, e);
-        }
+        this.JobUpdate?.Invoke(this, e);
     }
 
     public override string ToString()
@@ -151,18 +89,7 @@ public class JobDoneEventArgs : EventArgs
         this.Job = job;
     }
 
-    public Job Job
-    {
-        get
-        {
-            return job;
-        }
-
-        set
-        {
-            job = value;
-        }
-    }
+    public Job Job { get; set; }
 }
 
 public class ModifiedList : List<Job>
@@ -175,7 +102,7 @@ public class ModifiedList : List<Job>
 
 public class WorkForce
 {
-    static void Main(string[] args)
+    static void Main()
     {
         ModifiedList jobs = new ModifiedList();
         Dictionary<string, Employee> employeesByName = new Dictionary<string, Employee>();
@@ -201,12 +128,12 @@ public class WorkForce
                     job.JobUpdate += jobs.HandleJobCompletion;
                     break;
                 case "Pass":
-                    
+
                     List<Job> jobsToUpdate = new List<Job>(jobs);
                     foreach (var jobToUpdate in jobsToUpdate)
                     {
                         jobToUpdate.Update();
-                    }             
+                    }
                     break;
                 case "Status":
                     foreach (var jobNumberTwo in jobs)
