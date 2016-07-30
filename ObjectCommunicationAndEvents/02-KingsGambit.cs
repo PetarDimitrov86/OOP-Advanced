@@ -32,7 +32,15 @@ public class King : Person
     public void OnAttack()
     {
         Console.WriteLine($"King {this.Name} is under attack!");
-        this.Attacked?.Invoke(this, EventArgs.Empty);
+        OnKingAttacked(new EventArgs());
+    }
+
+    protected void OnKingAttacked(EventArgs args)
+    {
+        if (Attacked != null)
+        {
+            Attacked(this, args);
+        }
     }
 }
 
