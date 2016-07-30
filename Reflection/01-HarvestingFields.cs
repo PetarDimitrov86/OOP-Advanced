@@ -59,7 +59,7 @@ public class HarvestingFields
                     {
                         if (protectedField.IsFamily)
                         {
-                            Console.WriteLine($"{GetVisibility(protectedField)} {protectedField.FieldType.ToString().Substring(protectedField.FieldType.ToString().LastIndexOf('.') + 1)} {protectedField.Name}");
+                            Console.WriteLine($"{GetVisibility(protectedField)} {protectedField.FieldType.Name} {protectedField.Name}");
                         }
                     }
                     break;
@@ -69,7 +69,7 @@ public class HarvestingFields
                     {
                         if (privateField.IsPrivate)
                         {
-                            Console.WriteLine($"{GetVisibility(privateField)} {privateField.FieldType.ToString().Substring(privateField.FieldType.ToString().LastIndexOf('.') + 1)} {privateField.Name}");
+                            Console.WriteLine($"{GetVisibility(privateField)} {privateField.FieldType.Name} {privateField.Name}");
                         }
                     }
                     break;
@@ -79,7 +79,7 @@ public class HarvestingFields
                     {
                         if (publicField.IsPublic)
                         {
-                            Console.WriteLine($"{GetVisibility(publicField)} {publicField.FieldType.ToString().Substring(publicField.FieldType.ToString().LastIndexOf('.') + 1)} {publicField.Name}");
+                            Console.WriteLine($"{GetVisibility(publicField)} {publicField.FieldType.Name} {publicField.Name}");
                         }
                     }
                     break;
@@ -87,7 +87,7 @@ public class HarvestingFields
                     FieldInfo[] allFields = myType.GetFields(BindingFlags.Instance | BindingFlags.NonPublic | BindingFlags.Public);
                     foreach (var field in allFields)
                     {
-                        Console.WriteLine($"{GetVisibility(field)} {field.FieldType.ToString().Substring(field.FieldType.ToString().LastIndexOf('.') + 1)} {field.Name}");
+                        Console.WriteLine($"{GetVisibility(field)} {field.FieldType.Name} {field.Name}");
                     }
                     break;
             }
