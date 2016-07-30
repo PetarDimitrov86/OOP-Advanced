@@ -12,6 +12,7 @@ namespace _03BarracksFactory.Core.Factories
         {
             Type T = Assembly.GetExecutingAssembly().DefinedTypes.First(t => t.Name == unitType);
             IUnit unit = Activator.CreateInstance(T) as IUnit;
+            //IEnumerable<TypeInfo> types = Assembly.GetExecutingAssembly().DefinedTypes;
             return unit;
         }
     }
